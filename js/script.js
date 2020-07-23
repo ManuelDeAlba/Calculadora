@@ -1,7 +1,16 @@
 const resultado = document.querySelector('#resultado');
 
 function agregar(n){
-	resultado.innerHTML = resultado.innerHTML + n;
+	if(resultado.innerText == "NaN" || resultado.innerText == "0"){
+		borrar();
+	}
+	if(resultado.innerText.length == 0){
+		if(n != "+" && n != "/" && n != "x"){
+			resultado.innerHTML = resultado.innerHTML + n;
+		}
+	} else {
+		resultado.innerHTML = resultado.innerHTML + n;
+	}
 }
 
 function calcular(){
@@ -15,9 +24,21 @@ function calcular(){
 		let res = parseFloat(arr[0]) + parseFloat(arr[1]);
 		resultado.innerHTML = res;
 	} else if(resta != -1){
-		let arr = operacion.split("-");
-		let res = parseFloat(arr[0]) - parseFloat(arr[1]);
-		resultado.innerHTML = res;
+		if(resta == 0){
+			let num = "";
+			for(var i=1;i<operacion.length;i++){
+				num += operacion[i];
+			}
+			let arr = num.split("-");
+			if(arr.length > 1){
+				let res = -parseFloat(arr[0]) - parseFloat(arr[1]);
+				resultado.innerHTML = res;
+			}
+		} else {
+			let arr = operacion.split("-");
+			let res = parseFloat(arr[0]) - parseFloat(arr[1]);
+			resultado.innerHTML = res;
+		}
 	} else if(multiplicacion != -1){
 		let arr = operacion.split("x");
 		let res = parseFloat(arr[0]) * parseFloat(arr[1]);
@@ -63,3 +84,35 @@ document.querySelector('#punto').addEventListener('click',()=>{agregar('.')});
 document.querySelector('#igual').addEventListener('click', calcular);
 document.querySelector('#c').addEventListener('click', borrar);
 document.querySelector('#atras').addEventListener('click', atras);
+
+function iluminar(elem){
+    elem.classList.add('iluminado');
+    setTimeout(()=>{
+        elem.classList.remove('iluminado');
+    },100)
+}
+
+const caracteresPermitidos = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ".", "+", "-", "/"];
+const id = ["n1","n2","n3","n4","n5","n6","n7","n8","n9","n0","punto","o1","o2","o4"];
+document.addEventListener('keydown', e => {
+	if(e.key == "*"){
+		agregar("x");
+		iluminar(document.querySelector('#o3'));
+	} else if(e.key == "Enter"){
+		calcular();
+		iluminar(document.querySelector('#igual'));
+	} else if(e.key == "c"){
+		borrar();
+		iluminar(document.querySelector('#c'));
+	} else if(e.key == "Backspace"){
+		atras();
+		iluminar(document.querySelector('#atras'));
+	} else {
+		for(let i=0;i<caracteresPermitidos.length;i++){
+			if(e.key == caracteresPermitidos[i]){
+				agregar(e.key);
+				iluminar(document.querySelector(`#${id[i]}`))
+			}
+		}
+	}
+})
