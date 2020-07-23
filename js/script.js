@@ -1,7 +1,7 @@
 const resultado = document.querySelector('#resultado');
 
 function agregar(n){
-	if(resultado.innerText == "NaN" || resultado.innerText == "0"){
+	if(resultado.innerText == "Operación inválida" || resultado.innerText == "0"){
 		borrar();
 	}
 	if(resultado.innerText.length == 0){
@@ -48,6 +48,9 @@ function calcular(){
 		let res = parseFloat(arr[0]) / parseFloat(arr[1]);
 		resultado.innerHTML = res;
 	}
+	if(resultado.innerText == "NaN"){
+		resultado.innerText = "Operación inválida";
+	}
 }
 
 function borrar(){
@@ -55,7 +58,7 @@ function borrar(){
 }
 
 function atras(){
-	if(resultado.innerText == "NaN"){
+	if(resultado.innerText == "Operación inválida"){
 		borrar();
 	} else {
 		let res = "";
@@ -115,4 +118,5 @@ document.addEventListener('keydown', e => {
 			}
 		}
 	}
+	e.preventDefault();
 })
