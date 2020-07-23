@@ -1,0 +1,98 @@
+*{
+	padding:0;
+	margin:0;
+}
+body{
+	height:100vh;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+}
+.calculadora{
+	background: #ccc;
+	width:30%;
+	max-width:300px;
+	padding:15px 10px;
+	border-radius:10px;
+}
+.pantalla{
+	width:100%;
+	height:50px;
+	background: #00A00B;
+	color:#fff;
+	margin:auto;
+	margin-bottom:10px;
+	box-shadow:inset 0 0 5px #000;
+	display:flex;
+	align-items: center;
+}
+.pantalla #resultado{
+	width:90%;
+	margin:auto;
+	font-size:20px;
+	font-family: monospace;
+	border:none;
+	outline: none;
+	overflow-x:auto;
+}
+/* SCROLLBAR CALCULADORA */
+.pantalla #resultado::-webkit-scrollbar{
+	appearance:none;
+	height:7px;
+}
+.pantalla #resultado::-webkit-scrollbar-button{
+	/*background: rgb(0,0,0,.4);*/
+	display:none;
+}
+.pantalla #resultado::-webkit-scrollbar-track{
+	background: rgb(0,255,0,.4);
+	border-radius:10px;
+}
+.pantalla #resultado::-webkit-scrollbar-thumb{
+	background: rgb(0,0,0,.4);
+	border-radius:10px;
+}
+.pantalla #resultado::-webkit-scrollbar-thumb:hover{
+	background: rgb(0,0,0,.6);
+}
+.teclas div{
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+.teclas div button{
+	width:100%;
+	height:60px;
+	background: #000;
+	color:#fff;
+	border:2px solid #fff;
+	font-size:20px;
+	cursor:pointer;
+	outline:none;
+	user-select: none;
+}
+.teclas button:hover{
+	background: #fff;
+	color: #000;
+	border:2px solid #000;
+	box-shadow: inset 0 0 10px #000,
+				0 0 10px #000;
+}
+.teclas button.iluminado{
+	background: #fff;
+	color: #000;
+	border:2px solid #000;
+	box-shadow: inset 0 0 10px #000,
+				0 0 10px #000;	
+}
+
+@media screen and (max-width: 768px){
+	.calculadora{
+		width:70%;
+	}
+}
+@media screen and (max-width: 370px){
+	.calculadora{
+		width:90%;
+	}
+}
